@@ -1,0 +1,26 @@
+<div class="panel panel-default">
+  <div class="panel-body" >
+    <div class="col-sm-3">
+      <%= form_for @link do |f|  %>
+      <p >
+        <p>
+          <%= f.label 'Link:' %><br>
+          <%= f.text_field :link , class:"form-control" %>
+        </p>
+
+        <p>
+          <%= f.label 'Link description:' %><br>
+          <%= f.text_field :link_descrition , class:"form-control" %>
+        </p>
+
+        <p>
+          <% if @link.persisted? %>
+            <%= f.submit 'Update', class:"btn btn-default" %>
+          <% else %>
+            <%= f.submit 'Create', class: "btn btn-default" %>
+          <% end %>
+        </p>
+      <% end %>
+    </div>
+  </div>
+</div>

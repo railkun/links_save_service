@@ -1,0 +1,16 @@
+<div class="panel panel-default" >
+  <% @links.each do |link| %>
+    <div class="panel-heading">
+      <p>
+        <%= 'Link:' %>
+        <%= link.link %>;
+      </p>
+    </div>
+    <div class="panel-body">
+      <div>
+        <%= 'Description:' %>
+        <%= link.link_descrition %>;
+      </div>
+    </div>
+  <% end %>
+</div>
