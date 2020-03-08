@@ -41,8 +41,6 @@ class LinksController < ApplicationController
     @link = Link.find(params[:id])
 
     if @link.user == current_user
-      binding.pry
-      @link.tag_list.remove()
       @link.destroy
     else
     end
@@ -59,9 +57,6 @@ class LinksController < ApplicationController
     else
       @links = Link.all.page(params[:page]).per(6)
     end
-
-
-
 
     render "links/index"
   end
