@@ -1,4 +1,5 @@
 class Link < ApplicationRecord
   belongs_to :user
-  has_many :tags
+
+  acts_as_taggable_on :tags
 end

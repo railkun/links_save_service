@@ -1,0 +1,21 @@
+!!!
+%html
+  %head
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+    %title LinksManagerService
+    = csrf_meta_tags
+    = csp_meta_tag
+    = stylesheet_link_tag    'application', media: 'all'
+    = javascript_include_tag 'application'
+  %body
+    - if user_signed_in?
+      = render 'layouts/nav'
+    - else
+    .container
+      .row
+        .col-md-9
+          = yield
+        .col-md-2
+          - if user_signed_in?
+            = render 'links/tags'
+          - else

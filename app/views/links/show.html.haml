@@ -1,0 +1,18 @@
+%div
+  .panel.panel-default
+    %p
+      %div
+        .panel-heading
+          = 'Link:'
+          = @link.link
+      %div
+        .panel-body
+          = 'Tags:'
+          - if @link.tag_list.present?
+            = @link.tag_list
+          -else
+            = 'tag is empty'
+      %div
+        .panel-body
+          = 'Description:'
+          = @link.link_descrition

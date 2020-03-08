@@ -1,0 +1,11 @@
+%nav.navbar.navbar-expand-lg.navbar-light.bg-secondary
+  %div.collapse.navbar-collapse
+    %div.navbar-brand
+      Links Manager Service
+    %ul.navbar-nav.mr-auto
+      %li.nav-item.active
+        = link_to 'Add link', new_link_path, method: :get, class: "nav-link"
+      %li.nav-item.active{ style: 'margin-left: 10px'}
+        = link_to 'Back to links list', links_path, method: :get, class: "nav-link"
+    %div.nav-item.active.text-righ
+      = button_to 'Sing out', destroy_user_session_path, method: :delete, class: "btn btn-outline-dark"

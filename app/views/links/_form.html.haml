@@ -1,0 +1,19 @@
+%div.container{ style: 'margin-top: 10px'}
+  %div.list-group
+    %div.list-group-item
+      = simple_form_for @link do |f|
+        %form
+          %div.form-group
+            %h5
+              Add your link:
+          %div.form-group
+            = f.input :link, input_html: { :class => 'form-control' }, placeholder: "Enter link without https://"
+          %div.form-group
+            = f.input :tag_list, input_html: { :class => 'form-control' }, placeholder: "Enter tag"
+          %div.form-group
+            = f.input :link_descrition, input_html: { :class => 'form-control' }, placeholder: "Enter description"
+          %p
+          - if @link.persisted?
+            = f.button :submit, label: 'Update link', class:"btn btn-outline-success"
+          - else
+            = f.button :submit, label: 'Save link', class:"btn btn-outline-success"

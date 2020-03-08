@@ -1,7 +1,8 @@
 class LinksController < ApplicationController
+  before_action :authenticate_user!
 
   def index
-    @links = Link.all
+    @links = Link.all.page(params[:page]).per(6)
   end
 
   def show
@@ -13,26 +14,53 @@ class LinksController < ApplicationController
   end
 
   def create
-    @link = Link.create(link_params)
+    @link = Link.new(link_params)
+    @link.user = current_user
+    @link.save
+      redirect_to links_path
   end
 
   def edit
-    @link = Link.find(params[:id])
+    @link = current_user.links.find(params[:id])
   end
 
   def update
     @link = Link.find(params[:id])
-    @link.update(link_params)
+
+    if @link.user == current_user
+      @link.update(link_params)
+    else
+    end
+
+    redirect_to links_path
   end
 
   def destroy
     @link = Link.find(params[:id])
-    @link.destroy
+
+    if @link.user == current_user
+      binding.pry
+      @link.tag_list.remove()
+      @link.destroy
+    else
+    end
+
+    redirect_to links_path
+  end
+
+  def tagged
+    if params[:tag].present?
+      @links = Link.tagged_with(params[:tag])
+    else
+      @links = Link.all
+    end
+
+    render "links/index"
   end
 
   private
 
   def link_params
-    params.require(:link).permit(:link, :link_descrition)
+    params.require(:link).permit(:link, :link_descrition, :tag_list)
   end
 end
