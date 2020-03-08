@@ -14,3 +14,8 @@
 
  // "bootstrap-sprockets" must be imported before "bootstrap" and "bootstrap/variables"
  @import "bootstrap";
+
+ .scrollClass {
+   height:525px;
+   overflow-y: scroll;
+ }

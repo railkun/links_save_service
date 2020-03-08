@@ -1,4 +1,4 @@
-%nav.navbar.navbar-expand-lg.navbar-light.bg-secondary
+%nav.navbar.navbar-expand-lg.navbar-light.bg-light
   %div.collapse.navbar-collapse
     %div.navbar-brand
       Links Manager Service
@@ -6,6 +6,10 @@
       %li.nav-item.active
         = link_to 'Add link', new_link_path, method: :get, class: "nav-link"
       %li.nav-item.active{ style: 'margin-left: 10px'}
-        = link_to 'Back to links list', links_path, method: :get, class: "nav-link"
+        = link_to 'Links list', links_path, method: :get, class: "nav-link"
+      - if current_user.role == 'admin'
+        %li.nav-item.active{ style: 'margin-left: 10px'}
+          = link_to 'Admin panel', '/admin', method: :get, class: "nav-link"
+      - else
     %div.nav-item.active.text-righ
       = button_to 'Sing out', destroy_user_session_path, method: :delete, class: "btn btn-outline-dark"

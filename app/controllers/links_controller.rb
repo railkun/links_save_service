@@ -2,7 +2,9 @@ class LinksController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @links = Link.all.page(params[:page]).per(6)
+    @links = current_user.links.page(params[:page]).per(6)
+
+    @user_tags = user_tags
   end
 
   def show
@@ -49,11 +51,17 @@ class LinksController < ApplicationController
   end
 
   def tagged
+    @user_tags = user_tags
+
     if params[:tag].present?
-      @links = Link.tagged_with(params[:tag])
+      @links = Link.tagged_with(params[:tag]).page(params[:page]).per(6)
+      @tag = params[:tag]
     else
-      @links = Link.all
+      @links = Link.all.page(params[:page]).per(6)
     end
+
+
+
 
     render "links/index"
   end
@@ -62,5 +70,15 @@ class LinksController < ApplicationController
 
   def link_params
     params.require(:link).permit(:link, :link_descrition, :tag_list)
+  end
+
+  def user_tags
+    user_tags = ActiveRecord::Base.connection.execute(
+      "SELECT * FROM tags "\
+      "inner join taggings "\
+      "on tags.id = taggings.tag_id "\
+      "inner join links on taggings.taggable_id = links.id "\
+      "where links.user_id = #{current_user.id}"
+    )
   end
 end

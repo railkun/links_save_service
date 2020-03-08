@@ -1,10 +1,11 @@
 %div.container{ style: 'margin-top: 10px'}
   %div.list-group
-    %div.list-group-item
-      = 'Your tags:'
-    - ActsAsTaggableOn::Tag.all.each do |tag|
-      - if tag.present?
-        = link_to tag.name, tagged_path(tag: tag.name), class: "list-group-item list-group-item-action"
-      - else
-        %div.list-group-item
-          = 'Sorry but you don`t have tag'
+    - if @user_tags.present?
+      %div.list-group-item
+        = 'Your tags:'
+      %div.nav.nav-pills.nav-stacked.scrollClass
+        - @user_tags.each do |tag|
+          = link_to tag['name'], tagged_path(tag: tag['name']), class: "list-group-item list-group-item-action"
+    - else
+      %div.list-group-item
+        = 'Sorry but you don`t have any tag'
