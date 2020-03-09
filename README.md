@@ -1,24 +1,42 @@
-# README
+# Links Manager Service
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+It is my rails app for manage your links.
 
-Things you may want to cover:
+## About app
 
-* Ruby version
+In this app you can add links and tags for them.
+You can create, edit, delete your links and tags.
 
-* System dependencies
 
-* Configuration
+## Installation
+Clone my app for start
 
-* Database creation
+```bash
+git clone https://github.com/railkun/checklist_audit_service.git
+```
+Run bundle install for install all gems
 
-* Database initialization
+```bash
+bundle install
+```
 
-* How to run the test suite
+Create database and make migrations
 
-* Services (job queues, cache servers, search engines, etc.)
+```bash
+rails db:create
+```
 
-* Deployment instructions
+```bash
+rails db:migrate
+```
 
-* ...
+Run setup for create admin User
+
+```bash
+rails db:setup
+```
+
+Admin email and password locait db/seed.rb
+
+## License
+[MIT](https://choosealicense.com/licenses/mit/)
