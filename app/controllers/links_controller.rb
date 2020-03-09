@@ -17,9 +17,9 @@ class LinksController < ApplicationController
     @link.user = current_user
 
     if @link.save
-      redirect_to links_path
+      redirect_to links_path, notice: "Link successfully added"
     else
-      redirect_to new_link_path, alert: 'Link can`t be empty'
+      render :new
     end
   end
 
@@ -33,24 +33,23 @@ class LinksController < ApplicationController
 
     if @link.user == current_user
       if @link.update(link_params)
-        redirect_to links_path
+        redirect_to links_path, notice: "Link successfully updated"
       else
-        redirect_to edit_link_path(@link)
+        render :edit
       end
     else
-      redirect_to links_path, alert: 'Link can`t be empty'
+      redirect_to links_path
     end
   end
 
   def destroy
     @link = Link.find(params[:id])
 
-    if @link.user == current_user
-      @link.destroy
+    if @link.user == current_user && @link.destroy
+      redirect_to links_path, alert: "Link successfully deleted"
     else
+      render :edit
     end
-
-    redirect_to links_path
   end
 
   def tagged

@@ -15,6 +15,7 @@ SimpleForm.setup do |config|
   # whole input.
   config.wrappers :default, class: :input,
     hint_class: :field_with_hint, error_class: :field_with_errors, valid_class: :field_without_errors do |b|
+
     ## Extensions enabled by default
     # Any of these extensions can be disabled for a
     # given input by passing: `f.input EXTENSION_NAME => false`.
@@ -52,10 +53,10 @@ SimpleForm.setup do |config|
     b.optional :readonly
 
     ## Inputs
-    # b.use :input, class: 'input', error_class: 'is-invalid', valid_class: 'is-valid'
+    #b.use :input, class: 'input', error_class: 'is-invalid', valid_class: 'is-valid'
     b.use :label_input
     b.use :hint,  wrap_with: { tag: :span, class: :hint }
-    b.use :error, wrap_with: { tag: :span, class: :error }
+    b.use :error, wrap_with: { tag: :span, class: :'invalid-feedback' }
 
     ## full_messages_for
     # If you want to display the full error message for the attribute, you can

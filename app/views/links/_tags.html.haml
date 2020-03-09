@@ -1,6 +1,6 @@
 %div.container{ style: 'margin-top: 10px'}
   %div.list-group
-    - if @user_tags.present?
+    - if @user_tags.any?
       %div.list-group-item
         = 'Your tags:'
       %div.nav.nav-pills.nav-stacked.scrollClass

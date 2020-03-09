@@ -12,6 +12,7 @@
       = render 'layouts/nav'
     - else
     .container
+      = render 'layouts/flash', flash: flash
       .row
         .col-md-9
           = yield
