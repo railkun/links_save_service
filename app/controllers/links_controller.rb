@@ -43,7 +43,7 @@ class LinksController < ApplicationController
   end
 
   def destroy
-    @link = Link.find(params[:id])
+    @link = current_user.links.find(params[:id])
 
     if @link.user == current_user && @link.destroy
       redirect_to links_path, alert: "Link successfully deleted"
@@ -56,10 +56,10 @@ class LinksController < ApplicationController
     @user_tags = user_tags
 
     if params[:tag].present?
-      @links = Link.tagged_with(params[:tag]).page(params[:page]).per(6)
+      @links = current_user.links.tagged_with(params[:tag]).page(params[:page]).per(6)
       @tag = params[:tag]
     else
-      @links = Link.all.page(params[:page]).per(6)
+      @links = current_user.links.page(params[:page]).per(6)
     end
 
     render "links/index"

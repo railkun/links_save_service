@@ -1,6 +1,6 @@
 .container{ style: 'margin-top: 10px'}
   .list-group
-    - if @user_tags.any?
+    - if @user_tags.present? && @user_tags.any?
       .list-group-item
         = 'Your tags:'
       .nav.nav-pills.nav-stacked.scrollClass
