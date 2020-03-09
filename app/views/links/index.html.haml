@@ -1,5 +1,5 @@
 - if @tag.present?
-  %div.container{ style: 'margin-top: 10px'}
+  .container{ style: 'margin-top: 10px'}
     %h4
       = "Your filter by this tag: #{@tag}"
 -else
@@ -18,10 +18,10 @@
             = 'tag is empty'
         %p.card-text
           = link.link_descrition
-        %div.row
-          %div.col-sm
+        .row
+          .col-sm
             = button_to 'Update link', edit_link_path(link), method: :get, class: "card-link btn btn-outline-primary"
-          %div.col-sm
+          .col-sm
             = button_to 'Delete link', link_path(link), method: :delete, class: "card-link btn btn-outline-danger"
-%div.d-flex.p-2.justify-content-center{ style: 'margin-top: 10px'}
+.d-flex.p-2.justify-content-center{ style: 'margin-top: 10px'}
   = paginate @links, theme: 'twitter-bootstrap-4', pagination_class: "pagination-sm", nav_class: "d-inline-b"

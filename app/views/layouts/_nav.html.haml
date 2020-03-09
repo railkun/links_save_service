@@ -1,6 +1,6 @@
 %nav.navbar.navbar-expand-lg.navbar-light.bg-light
-  %div.collapse.navbar-collapse
-    %div.navbar-brand
+  .collapse.navbar-collapse
+    .navbar-brand
       Links Manager Service
     %ul.navbar-nav.mr-auto
       %li.nav-item.active
@@ -11,5 +11,5 @@
         %li.nav-item.active{ style: 'margin-left: 10px'}
           = link_to 'Admin panel', '/admin', method: :get, class: "nav-link"
       - else
-    %div.nav-item.active.text-righ
+    .nav-item.active.text-righ
       = button_to 'Sing out', destroy_user_session_path, method: :delete, class: "btn btn-outline-dark"
