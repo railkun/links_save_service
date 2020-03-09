@@ -7,34 +7,39 @@ class LinksController < ApplicationController
     @user_tags = user_tags
   end
 
-  def show
-    @link = Link.find(params[:id])
-  end
-
   def new
     @link = Link.new
+    @user_tags = user_tags
   end
 
   def create
     @link = Link.new(link_params)
     @link.user = current_user
-    @link.save
+
+    if @link.save
       redirect_to links_path
+    else
+      redirect_to new_link_path, alert: 'Link can`t be empty'
+    end
   end
 
   def edit
     @link = current_user.links.find(params[:id])
+    @user_tags = user_tags
   end
 
   def update
     @link = Link.find(params[:id])
 
     if @link.user == current_user
-      @link.update(link_params)
+      if @link.update(link_params)
+        redirect_to links_path
+      else
+        redirect_to edit_link_path(@link)
+      end
     else
+      redirect_to links_path, alert: 'Link can`t be empty'
     end
-
-    redirect_to links_path
   end
 
   def destroy
@@ -68,7 +73,7 @@ class LinksController < ApplicationController
   end
 
   def user_tags
-    user_tags = ActiveRecord::Base.connection.execute(
+    ActiveRecord::Base.connection.execute(
       "SELECT * FROM tags "\
       "inner join taggings "\
       "on tags.id = taggings.tag_id "\
